@@ -472,28 +472,11 @@ namespace PdfSharp.Pdf
 
             // Set Creator if value is undefined. This is the 'application' in Adobe Reader.
             if (info.Elements[PdfDocumentInformation.Keys.Creator] is null)
-                info.Creator = PdfSharpProductVersionInformation.Producer;
-
-            // We set Producer if it is not yet set.
-            var pdfProducer = PdfSharpProductVersionInformation.Creator;
-#if DEBUG
-            // Add OS suffix only in DEBUG build.
-            pdfProducer += $" under {RuntimeInformation.OSDescription}";
-#endif
-            // Keep original producer if file was imported. This is 'PDF created by' in Adobe Reader.
-            string producer = info.Producer;
-            if (producer.Length == 0)
-            {
-                producer = pdfProducer;
-            }
-            else
-            {
-                // Prevent endless concatenation if file is edited with PDFsharp more than once.
-                if (!producer.StartsWith(PdfSharpProductVersionInformation.Title, StringComparison.Ordinal))
-                    producer = $"{pdfProducer} (Original: {producer})";
-            }
-            info.Elements.SetString(PdfDocumentInformation.Keys.Producer, producer);
-
+                info.Creator = string.Empty;
+            
+            if (info.Elements[PdfDocumentInformation.Keys.Producer] is null)
+                info.Producer = string.Empty;
+            
             // Prepare used fonts.
             _fontTable?.PrepareForSave();
 
