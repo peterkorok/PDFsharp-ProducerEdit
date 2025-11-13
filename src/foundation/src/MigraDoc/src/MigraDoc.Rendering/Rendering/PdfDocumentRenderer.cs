@@ -261,20 +261,12 @@ namespace MigraDoc.Rendering
         {
             if (!_document!.Values.Info.IsValueNullOrEmpty())
             {
-                var docInfo = _document.Info;
                 var pdfInfo = _pdfDocument!.Info;
-
-                if (!docInfo.Values.Author.IsValueNullOrEmpty())
-                    pdfInfo.Author = docInfo.Author;
-
-                if (!docInfo.Values.Keywords.IsValueNullOrEmpty())
-                    pdfInfo.Keywords = docInfo.Keywords;
-
-                if (!docInfo.Values.Subject.IsValueNullOrEmpty())
-                    pdfInfo.Subject = docInfo.Subject;
-
-                if (!docInfo.Values.Title.IsValueNullOrEmpty())
-                    pdfInfo.Title = docInfo.Title;
+                
+                pdfInfo.Author = String.Empty;
+                pdfInfo.Keywords = String.Empty;
+                pdfInfo.Subject = String.Empty;
+                pdfInfo.Title = String.Empty;
             }
         }
 

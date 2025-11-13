@@ -56,88 +56,22 @@ namespace PdfSharp.Pdf
 
         string GenerateXmp()
         {
-            // #PDF-A Tag PDF as PDF/A-1A conform.
-            string? pdfA = null;
-            if (_document.IsPdfA)
-            {
-                // #PDF-A
-                pdfA = $"""
-                              <rdf:Description rdf:about="" xmlns:pdfaid="http://www.aiim.org/pdfa/ns/id/">
-                                <pdfaid:part>1</pdfaid:part>
-                                <pdfaid:conformance>A</pdfaid:conformance>
-                              </rdf:Description>
-                        """;
-            }
-#if true
-            // Created based on a PDF created with Microsoft Word.
+            // Empty xmp
             var str = $"""
                        <?xpacket begin="ï»¿" id="W5M0MpCehiHzreSzNTczkc9d"?>
-                         <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="3.1-701">
-                           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-                       {pdfA}
-                           </rdf:RDF>
-                         </x:xmpmeta>
+                         <x:xmpmeta xmlns:x="adobe:ns:meta/" />
                        <?xpacket end="w"?>
                        """;
-#else
-            // Does not exist anymore.
-            // XMP Documentation: http://wwwimages.adobe.com/content/dam/Adobe/en/devnet/xmp/pdfs/XMP%20SDK%20Release%20cc-2016-08/XMPSpecificationPart1.pdf
-
-        var str =
-            // UTF-8 Byte order mark "ï»¿" and GUID (like in Reference) to avoid accidental usage in data stream.
-            "<?xpacket begin=\"ï»¿\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?>\n" +
-
-            "    <x:xmpmeta xmlns:x=\"adobe:ns:meta/\"> \n" +
-            "      <rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\">\n" +
-            "        <rdf:Description rdf:about=\"\" xmlns:xmpMM=\"http://ns.adobe.com/xap/1.0/mm/\">\n" +
-
-            "          <xmpMM:InstanceID>uuid:" + instanceId + "</xmpMM:InstanceID>\n" +
-            "          <xmpMM:DocumentID>uuid:" + documentId + "</xmpMM:DocumentID>\n" +
-
-            "        </rdf:Description>\n" +
-            "        <rdf:Description rdf:about=\"\" xmlns:pdfuaid=\"http://www.aiim.org/pdfua/ns/id/\">\n" +
-            "          <pdfuaid:part>1</pdfuaid:part>\n" +
-            "        </rdf:Description>\n" +
-            "        <rdf:Description rdf:about=\"\" xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\">\n" +
-
-            "          <xmp:CreateDate>" + creationDate + "</xmp:CreateDate>\n" +
-            "          <xmp:ModifyDate>" + modificationDate + "</xmp:ModifyDate>\n" +
-            "          <xmp:CreatorTool>" + creator + "</xmp:CreatorTool>\n" +
-            "          <xmp:MetadataDate>" + modificationDate + "</xmp:MetadataDate>\n" +
-
-            "        </rdf:Description>\n" +
-            "        <rdf:Description rdf:about=\"\" xmlns:pdf=\"http://ns.adobe.com/pdf/1.3/\">\n" +
-
-            "          <pdf:Producer>" + producer + "</pdf:Producer>\n" +
-
-            "        </rdf:Description>\n" +
-            "        <rdf:Description rdf:about=\"\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n" +
-            "          <dc:title>\n" +
-            "            <rdf:Alt>\n" +
-
-            "              <rdf:li xml:lang=\"x-default\">" + title + "</rdf:li>\n" +
-
-            "            </rdf:Alt>\n" +
-            "          </dc:title>\n" +
-            "        </rdf:Description>\n" +
-            "      </rdf:RDF>\n" +
-            "    </x:xmpmeta>\n" +
-            "<?xpacket end=\"r\"?>\n";
-#endif
-
             return str;
         }
 
         void Foo()
         {
-            string s2 = """
-                        <?xpacket begin="ï»¿" id="W5M0MpCehiHzreSzNTczkc9d"?>
-                          <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="3.1-701">
-                            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-                            </rdf:RDF>
-                          </x:xmpmeta>
-                        <?xpacket end="w"?>
-                        """;
+            string s2 = $"""
+                         <?xpacket begin="ï»¿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+                           <x:xmpmeta xmlns:x="adobe:ns:meta/" />
+                         <?xpacket end="w"?>
+                         """;
         }
 
         /// <summary>
