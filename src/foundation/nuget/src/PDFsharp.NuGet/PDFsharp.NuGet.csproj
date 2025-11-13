@@ -2,18 +2,20 @@
 
   <PropertyGroup>
     <TargetFrameworks>net6.0;net8.0;netstandard2.0</TargetFrameworks>
-    <NoBuild>true</NoBuild>
-    <!--<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>-->
-    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <NoBuild>false</NoBuild>
+<!--    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>-->
+    <IncludeBuildOutput>true</IncludeBuildOutput>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\..\..\StrongnameKey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyVersion>0.1.21</AssemblyVersion>
+    <FileVersion>0.1.21</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup>
     <IsPackable>true</IsPackable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NuspecFile>$(MSBuildThisFileDirectory)$(MSBuildProjectName).nuspec</NuspecFile>
-    <NuGetId>PDFsharp</NuGetId>
+    <NuGetId>PDFsharp-ProducerEdit</NuGetId>
     <NuGetTitle>PDFsharp for Windows and Linux</NuGetTitle>
     <NuGetDescription Condition=" '$(Configuration)'=='Debug' ">$(DebugBuildMessage)%0D$(NuGetDescription)</NuGetDescription>
     <NuGetSummary>A .NET library for processing PDF.</NuGetSummary>

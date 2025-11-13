@@ -22,7 +22,7 @@ branches:
     # version: {6-0-0-preview-3}       -- taken from git tag only
     regex: ^(release[/-]|master)
     # Must not have mode set to be mainline?
-    increment: None
+    increment: Minor
     tag: ''
     prevent-increment-of-merged-branch-version: true
     track-merge-target: true

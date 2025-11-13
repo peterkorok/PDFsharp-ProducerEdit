@@ -411,15 +411,7 @@ namespace PdfSharp.Pdf.IO
 #endif
                 if (openMode == PdfDocumentOpenMode.Modify)
                 {
-                    // Create new or change existing document IDs.
-                    if (_document.Internals.SecondDocumentID == "")
-                        _document.Trailer.CreateNewDocumentIDs();
-                    else
-                    {
-                        byte[] agTemp = Guid.NewGuid().ToByteArray();
-                        _document.Internals.SecondDocumentID =
-                            PdfEncoders.RawEncoding.GetString(agTemp, 0, agTemp.Length);
-                    }
+                    _document.Internals.SecondDocumentID = "";
 
                     // Change modification date.
                     _document.Info.ModificationDate = DateTime.Now;
