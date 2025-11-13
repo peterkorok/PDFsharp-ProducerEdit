@@ -5,6 +5,7 @@
         <description>$description$</description>
         <summary>PDFSharp fork with editable Producer tag.</summary>
         <authors>korokp</authors>
+        <version>$version$</version>
         <owners>$owners$</owners>
         <projectUrl>$projectUrl$</projectUrl>
         <license type="expression">MIT</license>

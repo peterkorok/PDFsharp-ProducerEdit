@@ -56,22 +56,6 @@ namespace PdfSharp.Pdf
 
         string GenerateXmp()
         {
-            var instanceId = Guid.NewGuid().ToString();
-            var documentId = Guid.NewGuid().ToString();
-
-            static DateTime SpecifyLocalDateTimeKindIfUnspecified(DateTime value)
-                => value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
-
-            var creationDate = SpecifyLocalDateTimeKindIfUnspecified(_document.Info.CreationDate).ToString("yyyy-MM-ddTHH:mm:ssK");
-            var modificationDate = creationDate;
-
-            var author = _document.Info.Author;
-            var creator = _document.Info.Creator;
-            var producer = _document.Info.Producer;
-            var title = _document.Info.Title;
-            var subject = _document.Info.Subject;
-            var keywords = _document.Info.Keywords;
-
             // #PDF-A Tag PDF as PDF/A-1A conform.
             string? pdfA = null;
             if (_document.IsPdfA)
@@ -87,31 +71,14 @@ namespace PdfSharp.Pdf
 #if true
             // Created based on a PDF created with Microsoft Word.
             var str = $"""
-                <?xpacket begin="ï»¿" id="W5M0MpCehiHzreSzNTczkc9d"?>
-                  <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="3.1-701">
-                    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-                      <rdf:Description rdf:about="" xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
-                        <pdf:Producer>{producer}</pdf:Producer><pdf:Keywords>{keywords}</pdf:Keywords>
-                      </rdf:Description>
-                      <rdf:Description rdf:about="" xmlns:dc="http://purl.org/dc/elements/1.1/">
-                        <dc:title><rdf:Alt><rdf:li xml:lang="x-default">{title}</rdf:li></rdf:Alt></dc:title>
-                        <dc:creator><rdf:Seq><rdf:li>{author}</rdf:li></rdf:Seq></dc:creator>
-                        <dc:description><rdf:Alt><rdf:li xml:lang="x-default">{subject}</rdf:li></rdf:Alt></dc:description>
-                      </rdf:Description>
-                      <rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/">
-                        <xmp:CreatorTool>{creator}</xmp:CreatorTool>
-                        <xmp:CreateDate>{creationDate}</xmp:CreateDate>
-                        <xmp:ModifyDate>{modificationDate}</xmp:ModifyDate>
-                      </rdf:Description>
-                      <rdf:Description rdf:about="" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/">
-                        <xmpMM:DocumentID>uuid:{documentId}</xmpMM:DocumentID>
-                        <xmpMM:InstanceID>uuid:{instanceId}</xmpMM:InstanceID>
-                      </rdf:Description>
-                {pdfA}
-                    </rdf:RDF>
-                  </x:xmpmeta>
-                <?xpacket end="w"?>
-                """;
+                       <?xpacket begin="ï»¿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+                         <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="3.1-701">
+                           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                       {pdfA}
+                           </rdf:RDF>
+                         </x:xmpmeta>
+                       <?xpacket end="w"?>
+                       """;
 #else
             // Does not exist anymore.
             // XMP Documentation: http://wwwimages.adobe.com/content/dam/Adobe/en/devnet/xmp/pdfs/XMP%20SDK%20Release%20cc-2016-08/XMPSpecificationPart1.pdf
@@ -163,64 +130,14 @@ namespace PdfSharp.Pdf
 
         void Foo()
         {
-            var documentId = Guid.NewGuid().ToString();
-            var instanceId = Guid.NewGuid().ToString();
-
-            static DateTime SpecifyLocalDateTimeKindIfUnspecified(DateTime value)
-                => value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
-
-            var creationDate = SpecifyLocalDateTimeKindIfUnspecified(_document.Info.CreationDate).ToString("yyyy-MM-ddTHH:mm:ssK");
-            var modificationDate = creationDate;
-
-            var author = _document.Info.Author;
-            var creator = _document.Info.Creator;
-            var producer = _document.Info.Producer;
-            var title = _document.Info.Title;
-            var subject = _document.Info.Subject;
-
-            string s2 = $"""
-                <?xpacket begin="ï»¿" id="W5M0MpCehiHzreSzNTczkc9d"?>
-                  <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="3.1-701">
-                    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-
-                      <rdf:Description rdf:about=""  xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
-                        <pdf:Producer>{producer}</pdf:Producer>
-                        <pdf:Keywords>Tag1 Tag 2 Tag3</pdf:Keywords>
-                      </rdf:Description>
-
-                      <rdf:Description rdf:about=""  xmlns:dc="http://purl.org/dc/elements/1.1/">
-                        <dc:title>
-                          <rdf:Alt>
-                            <rdf:li xml:lang="x-default">{title}</rdf:li>
-                          </rdf:Alt>
-                        </dc:title>
-                        <dc:creator>
-                        <rdf:Seq>
-                          <rdf:li>{author}</rdf:li>
-                        </rdf:Seq>
-                        </dc:creator>
-                        <dc:description>
-                          <rdf:Alt>
-                            <rdf:li xml:lang="x-default">{subject}</rdf:li>
-                          </rdf:Alt>
-                        </dc:description>
-                      </rdf:Description>
-
-                      <rdf:Description rdf:about=""  xmlns:xmp="http://ns.adobe.com/xap/1.0/">
-                        <xmp:CreatorTool>{creator}</xmp:CreatorTool>
-                        <xmp:CreateDate>{creationDate}</xmp:CreateDate>
-                        <xmp:ModifyDate>{modificationDate}</xmp:ModifyDate>
-                      </rdf:Description>
-
-                      <rdf:Description rdf:about=""  xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/">
-                        <xmpMM:DocumentID>uuid:{documentId}</xmpMM:DocumentID>
-                        <xmpMM:InstanceID>uuid:{instanceId}</xmpMM:InstanceID>
-                      </rdf:Description>
-
-                    </rdf:RDF>
-                  </x:xmpmeta>
-                <?xpacket end="w"?>
-                """;
+            string s2 = """
+                        <?xpacket begin="ï»¿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+                          <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="3.1-701">
+                            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                            </rdf:RDF>
+                          </x:xmpmeta>
+                        <?xpacket end="w"?>
+                        """;
         }
 
         /// <summary>
